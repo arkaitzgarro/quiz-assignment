@@ -1,0 +1,94 @@
+// TODO: Also do this for grid css
+.flex {
+  &-row {
+    display: flex;
+    flex-flow: row nowrap;
+  }
+
+  &-row_wrap {
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  &-row_reverse {
+    display: flex;
+    flex-flow: row-reverse nowrap;
+  }
+
+  &-column {
+    display: flex;
+    flex-flow: column;
+  }
+
+  &-justify {
+    &-center {
+      justify-content: center;
+    }
+
+    &-around {
+      justify-content: space-around;
+    }
+
+    &-between {
+      justify-content: space-between;
+    }
+
+    &-end {
+      justify-content: flex-end;
+    }
+
+    &-start {
+      justify-content: flex-start;
+    }
+  }
+
+  &-items {
+    &-baseline {
+      align-items: baseline;
+    }
+
+    &-center {
+      align-items: center;
+    }
+
+    &-start {
+      align-items: flex-start;
+    }
+
+    &-end {
+      align-items: flex-end;
+    }
+
+    &-stretch {
+      align-items: stretch;
+    }
+  }
+
+  &-self {
+    &-center {
+      align-self: center;
+    }
+
+    &-end {
+      align-self: flex-end;
+    }
+
+    &-start {
+      align-self: flex-start;
+    }
+  }
+
+  &-no-shrink {
+    flex-shrink: 0 !important;
+  }
+
+  &-basis-auto {
+    flex-basis: auto !important;
+  }
+
+  @for $i from 1 through 4 {
+    &-#{$i} {
+      flex: $i;
+    }
+  }
+}

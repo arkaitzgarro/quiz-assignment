@@ -1,0 +1,18 @@
+.fade {
+  &-enter, &-leave-to {
+    opacity: 0;
+  }
+
+  &-enter-active {
+    transition: transform  ease-out 0.25s,
+      opacity ease-out 0.25s;
+  }
+
+  &-leave-active {
+    transition: transform  ease-in 0.25s,
+      opacity ease-in 0.25s;
+  }
+  &-enter-to, &-leave {
+    opacity: 1;
+  }
+}

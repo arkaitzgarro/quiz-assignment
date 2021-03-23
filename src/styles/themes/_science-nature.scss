@@ -1,0 +1,33 @@
+.science-theme {
+  /* -------------------------- COLORS --------------------------*/
+
+  $themeColor: (
+    1: rgb(92, 88, 182, 0.6), // primary color
+    2: rgb(185, 87, 206, 0.6), // secondary color
+    3: rgb(89, 148, 206, 0.6), // terturay color
+    4: rgb(58, 78, 147, 0.6), // quaternary color
+    5: rgb(147, 58, 97, 0.6)
+  );
+  @include generateColors($themeColor);
+
+  /* -------------------------- DIMENSIONS --------------------------*/
+
+  $_factors: (
+    default: 0.25rem, // 4px
+    tablet: 0.1875rem, // 3px
+    mobile: 0.125rem // 2px
+  );
+  @include generateMargin($_factors);
+  @include generatePadding($_factors);
+
+  /* -------------------------- TYPOGRAPHY --------------------------*/
+
+  $_fontHeading: 'Cardo';
+  $_fontDefault: 'Oswald';
+  $_fontSizeFactors: (
+    default: 0.25rem, // 4px
+    tablet: 0.25rem, // 4px
+    mobile: 0.1875rem // 3px
+  );
+  @include generateTypography($_fontDefault, $_fontDefault, $_fontSizeFactors);
+}

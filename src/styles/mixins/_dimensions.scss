@@ -1,0 +1,118 @@
+/* Generate media queries based on the $_mediaQueryBuffer */
+@mixin generateMedia($selectedDevice, $query) {
+  @if length($_mediaQueryBuffer) > 0 {
+    @include media($query) {
+      $device: map-get($_mediaQueryBuffer, $selectedDevice);
+      // @debug $_mediaQueryBuffer;
+      @each $cssSelector, $style in $device {
+        // @debug #{$cssSelector};
+        #{$cssSelector} {
+          @each $prop, $value in $style {
+            // @debug $value;
+            #{$prop}: $value;
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin responsive ($styleProp, $factor, $newSizeFactors: null) {
+  #{$styleProp}: responsive($factor, $styleProp, $newSizeFactors)
+}
+
+@mixin size ($styleProp, $factorA, $factorB: null) {
+  #{$styleProp}: size($factorA, $factorB)
+}
+
+@mixin generateMargin($themeSizeFactors) {
+  $_sizeFactors: $themeSizeFactors !global;
+  @for $i from 1 through 10 {
+    .margin-#{$i} {
+      @include responsive(margin, $i);
+    }
+    .margin-#{$i}-left {
+      @include responsive(margin-left, $i);
+    }
+    .margin-#{$i}-right {
+      @include responsive(margin-right, $i);
+    }
+    .margin-#{$i}-btm {
+      @include responsive(margin-bottom, $i);
+    }
+    .margin-#{$i}-top {
+      @include responsive(margin-top, $i);
+    }
+    .margin-#{$i}-h {
+      @extend .margin-#{$i}-left;
+      @extend .margin-#{$i}-right;
+    }
+    .margin-#{$i}-v {
+      @extend .margin-#{$i}-top;
+      @extend .margin-#{$i}-btm;
+    }
+  }
+
+  .margin-0 {
+    margin: 0 !important;
+  }
+  .margin-0-left {
+    margin-left: 0 !important;
+  }
+  .margin-0-right {
+    margin-right: 0 !important;
+  }
+  .margin-0-btm {
+    margin-bottom: 0 !important;
+  }
+  .margin-0-top {
+    margin-top: 0 !important;
+  }
+}
+
+@mixin generatePadding($themeSizeFactors) {
+  $_sizeFactors: $themeSizeFactors !global;
+  @for $i from 1 through 10 {
+    .padding-#{$i} {
+      @include responsive(padding, $i);
+    }
+    .padding-#{$i}-left {
+      @include responsive(padding-left, $i);
+    }
+    .padding-#{$i}-right {
+      @include responsive(padding-right, $i);
+    }
+    .padding-#{$i}-btm {
+      @include responsive(padding-bottom, $i);
+    }
+    .padding-#{$i}-top {
+      @include responsive(padding-top, $i);
+    }
+    .padding-#{$i}-h {
+      @extend .padding-#{$i}-left;
+      @extend .padding-#{$i}-right;
+    }
+    .padding-#{$i}-v {
+      @extend .padding-#{$i}-top;
+      @extend .padding-#{$i}-btm;
+    }
+  }
+
+  .padding-0 {
+    padding: 0 !important;
+  }
+  .padding-0-left {
+    padding-left: 0 !important;
+  }
+  .padding-0-right {
+    padding-right: 0 !important;
+  }
+  .padding-0-btm {
+    padding-bottom: 0 !important;
+  }
+  .padding-0-top {
+    padding-top: 0 !important;
+  }
+}
+
+// TODO: Add mixin to convert px to rem

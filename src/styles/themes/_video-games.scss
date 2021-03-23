@@ -1,0 +1,32 @@
+.video-theme {
+  /* -------------------------- COLORS --------------------------*/
+
+  $themeColor: (
+    1: darken(#2200e2, 39%), // primary color
+    2: #68BBE5, // secondary color
+    3: #FDF100, // terturay color
+    4: #70BE5B, // quaternary color
+    5: #4E53A5 // quinary color
+  );
+  @include generateColors($themeColor);
+
+  /* -------------------------- DIMENSIONS --------------------------*/
+
+  $_factors: (
+    default: 0.25rem, // 4px
+    tablet: 0.1875rem, // 3px
+    mobile: 0.125rem // 2px
+  );
+  @include generateMargin($_factors);
+  @include generatePadding($_factors);
+
+  /* -------------------------- TYPOGRAPHY --------------------------*/
+  $_fontHeading: 'Open Sans';
+  $_fontDefault: 'Press Start 2P';
+  $_fontSizeFactors: (
+    default: 0.1875rem, // 4px
+    tablet: 0.1875rem, // 4px
+    mobile: 0.125rem // 3px
+  );
+  @include generateTypography($_fontDefault, $_fontDefault, $_fontSizeFactors);
+}

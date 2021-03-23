@@ -1,0 +1,26 @@
+// TODO: Don't forget lineheight
+@mixin generateTypography($defaultFont, $headingFont, $factors) {
+  * {
+    font-family: $defaultFont;
+  }
+  @for $i from 1 through 4 {
+    .h#{$i}, h#{$i} {
+      font-family: $headingFont;
+      font-weight: 500;
+    }
+  }
+
+  /* RESPONSIVE FONT_SIZES */
+  .h1, h1 {
+    @include responsive(font-size, 8, $factors); // default: 32px, tablet: 32px, mobile: 24px
+  }
+  .h2, h2, .font-icon {
+    @include responsive(font-size, 6, $factors); // default: 24px, tablet: 24px, mobile: 18px
+  }
+  .h3, h3, .p, p {
+    @include responsive(font-size, 4.68, $factors); // default: 18,72px, tablet: 18,72px, mobile: 14,04px
+  }
+  .h4, h4 {
+    @include responsive(font-size, 4, $factors); // default: 16px, tablet: 16px, mobile: 12px
+  }
+}

@@ -1,0 +1,40 @@
+$_mediaQueryBuffer: ();
+
+/* Libraries */
+@import '~normalize.css'; // reset css
+@import '~include-media/dist/include-media';
+
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cardo&family=Oswald&display=swap'); // science-nature-theme
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&family=Press+Start+2P&display=swap'); // video-game-theme
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&display=swap'); // default-theme
+@import '~material-design-icons/iconfont/material-icons.css';
+
+/* DEFAULTS */
+@import 'defaults/';
+
+/* FUNCTIONS */
+@import 'functions/colors';
+@import 'functions/dimensions';
+
+/* MIXINS */
+@import 'mixins/colors';
+@import 'mixins/dimensions';
+@import 'mixins/typography';
+
+/* THEMES */
+@import 'themes/science-nature';
+@import 'themes/video-games';
+@import 'themes/default'; // Must be after the other themes so we can overwrite the other themes
+
+/* UTILITIES */
+@import 'utilities/flex';
+@import 'utilities/button';
+@import 'utilities/text';
+@import 'utilities/button';
+@import 'utilities/transitions/slide';
+@import 'utilities/transitions/fade';
+
+/* Generate responsive style rules */
+@include generateMedia('tablet', '<=desktop');
+@include generateMedia('mobile', '<=tablet');

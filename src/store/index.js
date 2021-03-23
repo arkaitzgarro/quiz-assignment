@@ -5,11 +5,49 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    theme: 'default-theme',
+    token: '',
+    questions: [],
+    scores: [],
+    level: ''
+  },
+  getters: {
+    numberOfQuizCompleted: state => {
+      return state.scores.length
+    }
   },
   mutations: {
-  },
-  actions: {
-  },
-  modules: {
+    storeTheme (state, theme) {
+      state.theme = theme
+    },
+    storeToken (state, token) {
+      state.token = token
+    },
+    storeQuestion (state, questions) {
+      state.questions = parseQuestions(questions)
+    },
+    storeScore (state, score) {
+      state.scores.push(score)
+    },
+    storeLevel (state, level) {
+      state.level = level
+    }
   }
 })
+
+function parseQuestions (questions) {
+  // Create random number between array index range
+  const newQuestion = questions.map((question, index) => {
+    // Random at correct answer to all answers list
+    const answers = [...question.incorrect_answers]
+    const randomIndex = Math.round(Math.random() * (question.incorrect_answers.length - 1))
+    answers.splice(randomIndex, 0, question.correct_answer)
+    return {
+      number: index + 1,
+      question: question.question,
+      idxOfCorrectAnwser: randomIndex,
+      answers
+    }
+  })
+  return newQuestion
+}

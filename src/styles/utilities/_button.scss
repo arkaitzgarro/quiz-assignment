@@ -1,0 +1,36 @@
+.button {
+  @extend .p, .padding-7-h, .padding-5-top, .padding-6-btm;
+  outline: 0;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+  transition-property: transform, box-shadow;
+  transition-timing-function: ease-in;
+  transition-duration: 250ms;
+  border-radius: 45px; // TODO: should be relative to height
+  border: 1px solid black;
+  min-width: 190px;
+  font-weight: bold;
+  &:hover {
+    box-shadow: 0 8px 16px 3px rgba(0,0,0,0.15);
+    transform: translateY( -2px ) scale( 1.01 );
+    cursor: pointer;
+  }
+  &:active {
+    transform: translateY( 2px ) scale( 1 );
+    cursor: pointer;
+  }
+}
+
+@for $i from 1 through 4 {
+  .button_#{$i} {
+    @extend .color-#{$i}-white, .bg-color-#{$i}, .border-color-#{$i};
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.20);
+    &:hover {
+      box-shadow: 0 8px 16px 3px rgba(0,0,0,0.15);
+    }
+  }
+  .button_#{$i}-inverse {
+    @extend .color-#{$i},.border-color-#{$i};
+    background-color: white;
+    border-width: 3px;
+  }
+}

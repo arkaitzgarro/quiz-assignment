@@ -1,0 +1,16 @@
+@use 'sass:color';
+/* Return different tints of given color by add/substract white */
+// TODO: Add support for generating shades (greys) and tones (blacks)
+@function tints($color) {
+  @return (
+    // TODO: The percentage should be relative to the distance of current lightness and total lightness
+    black: color.adjust($color, $lightness: -60%),
+    darker: color.adjust($color, $lightness: -40%),
+    dark: color.adjust($color, $lightness: -20%),
+    medium: color.adjust($color, $lightness: -10%),
+    default: $color,
+    light: color.adjust($color, $lightness: 10%),
+    lighter: color.adjust($color, $lightness: 32%),
+    white: color.adjust($color, $lightness: 48%)
+  );
+}

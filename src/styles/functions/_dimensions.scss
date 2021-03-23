@@ -1,0 +1,25 @@
+@use 'sass:map';
+// $_mediaQueryBuffer: () !global;
+@function size($factorA, $factorB: null) {
+  @if ($factorB) {
+    @return #{$factorA * $factorB}rem;
+  }
+  @return (map-get($_sizeFactors, 'default') * $factorA);
+}
+
+/* Set the mediaQueryBuffer for tablet and mobile and return the default device value */
+// TODO: should support rem and em and make styleProp required
+@function responsive($factor, $styleProp: null, $newSizeFactors: null) {
+  @if $newSizeFactors == null {
+    $newSizeFactors: $_sizeFactors
+  } @else {
+    $newSizeFactors: map-merge($_sizeFactors, $newSizeFactors)
+  }
+
+  @if $styleProp {
+    $entryTablet: ($styleProp: (map-get($newSizeFactors, 'tablet') * $factor));
+    $entryMobile: ($styleProp: (map-get($newSizeFactors, 'mobile') * $factor));
+    $_mediaQueryBuffer: map.deep-merge($_mediaQueryBuffer, (tablet: (&: $entryTablet), mobile: (&: $entryMobile))) !global;
+  }
+  @return (map-get($newSizeFactors, 'default') * $factor);
+}

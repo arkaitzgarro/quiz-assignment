@@ -1,0 +1,30 @@
+@use 'sass:map';
+@mixin generateColors($themeColors) {
+  $colors: ();
+  @each $role, $color in $themeColors {
+    $colors: map.set($colors, $role, tints($color));
+  }
+  // Create the actual color styling classes
+  @each $role, $tints in $colors {
+    .color-#{$role} {
+      color: map-get($tints, 'default');
+    }
+    .bg-color-#{$role} {
+      background-color: map-get($tints, 'default');
+    }
+    .border-color-#{$role} {
+      border-color: map-get($tints, 'default');
+    }
+    @each $tint, $value in $tints {
+      .color-#{$role}-#{'' + $tint} {
+        color: $value;
+      }
+      .bg-color-#{$role}-#{'' + $tint} {
+        background-color: $value;
+      }
+      .border-color-#{$role}-#{'' + $tint} {
+        border-color: $value;
+      }
+    }
+  }
+}

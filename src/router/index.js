@@ -1,29 +1,38 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import QuizSetup from '@/components/QuizSetup.vue'
+import Questions from '@/components/Questions'
+import Scores from '@/components/Scores'
 
 Vue.use(VueRouter)
 
+// TODO: Move all routes as child of QuizSetup so we can have less props in store (maybe)
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'QuizSetup',
+    component: QuizSetup
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/questions',
+    name: 'Questions',
+    component: Questions
+  },
+  {
+    path: '/scores',
+    name: 'Scores',
+    component: Scores
   }
 ]
 
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
-})
+/** Router factory function */
+export function createRouter (analytics) {
+  const router = new VueRouter({
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes
+  })
+  return router
+}
 
-export default router
+export default createRouter
