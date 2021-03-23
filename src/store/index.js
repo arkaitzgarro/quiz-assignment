@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  // TODO: Refactor to have less states
   state: {
     theme: 'default-theme',
     token: '',
@@ -38,7 +39,7 @@ export default new Vuex.Store({
 function parseQuestions (questions) {
   // Create random number between array index range
   const newQuestion = questions.map((question, index) => {
-    // Random at correct answer to all answers list
+    // Add correct answer to all answers list at random index
     const answers = [...question.incorrect_answers]
     const randomIndex = Math.round(Math.random() * (question.incorrect_answers.length - 1))
     answers.splice(randomIndex, 0, question.correct_answer)

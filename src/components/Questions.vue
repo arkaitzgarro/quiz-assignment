@@ -8,26 +8,31 @@
           ? $style['questions__bg-img_science']
           : ['bg-color-1', $style['questions__bg-img_game']]]">
       <div
-        :class="$style['questions__wrapper']"
-        class="flex-column padding-10">
-        <div
-          :class="[$style['questions__text'], $style['questions__text_theme']]"
-          class="p">
-          <div>{{ category }}</div>
-          <div :class="$style['questions__text-level']">Level: {{ level }}</div>
-        </div>
+        slot="header"
+        :class="[$style['questions__text'], $style['questions__text_theme']]"
+        class="p">
+        <div>{{ category }}</div>
+        <div :class="$style['questions__text-level']">Level: {{ capitalizeFirstChar(level) }}</div>
+      </div>
+      <template slot="content">
         <transition name="fade" mode="out-in">
           <div
             :key="questionsAnswered"
-            class="flex-column flex-justify-center flex-items-center flex-1">
-            <p :class="$style['questions__text']">{{ currentQuestion.number }} of {{ questions.length }}</p>
+            :class="$style['questions__wrapper']"
+            class="flex-column flex-justify-center flex-items-center">
+            <p
+              v-if="hasQuestions"
+              :class="$style['questions__text']">
+              {{ currentQuestion.number }} of {{ questions.length }}
+            </p>
             <h2
+              v-if="hasQuestions"
               :class="$style['questions__text']"
               class="margin-10-btm padding-10">
               {{ decodeBase64(currentQuestion.question) }}
             </h2>
             <div :class="$style['questions__grid']">
-              <Grid>
+              <Grid v-if="hasQuestions">
                 <template v-for="(answer, index) in currentQuestion.answers">
                   <button
                     ref="answer"
@@ -55,7 +60,7 @@
             </div>
           </div>
         </transition>
-      </div>
+      </template>
     </PageLayout>
   </transition>
 </template>
@@ -65,6 +70,7 @@ import { mapState, mapMutations } from 'vuex'
 import PageLayout from '@/components/core/PageLayout'
 import Grid from '@/components/core/Grid'
 import FontIcon from '@/components/core/FontIcon'
+import { capitalizeFirstChar } from '@/helpers/string'
 
 export default {
   name: 'Questions',
@@ -88,6 +94,9 @@ export default {
       'questions',
       'level'
     ]),
+    hasQuestions () {
+      return this.questions.length > 0
+    },
     currentQuestion () {
       return this.questions[this.questionsAnswered]
     },
@@ -113,6 +122,7 @@ export default {
     ...mapMutations([
       'storeScore'
     ]),
+    capitalizeFirstChar,
     nextQuestion (answer) {
       if (this.questionsAnswered >= this.questions.length - 1) {
         const { level, amountCorrect, score } = this

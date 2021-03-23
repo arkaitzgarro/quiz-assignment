@@ -33,8 +33,6 @@
         <slot name="footer"/>
       </div>
     </footer>
-    <!-- TODO: Remove slot and refactor questions view -->
-    <slot/>
   </div>
 </template>
 
